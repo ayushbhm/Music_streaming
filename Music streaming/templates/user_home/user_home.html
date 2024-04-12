@@ -1,0 +1,137 @@
+{% extends 'user_base.html' %}
+
+{%block content%}
+
+
+<div class="container mt-4 " style="width: 100%;">
+    <h2 style="color: #f84952;"> Songs</h2>
+<div class="song-container" style="margin-top: 30px; ">
+    <div class="row" ;>
+        {% for latest_song in latest_songs_list[:4] %}
+            <div class="col-md-3 song-card" style="margin-bottom: 20px;  ">
+                <div class="card" style="color: #f65159;border: 1px solid #FFE2A8; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  ">
+                        <div class="card-body" style="padding: 20px; text-align: center;  ">
+                            <h5 class="card-title" style="  margin-bottom: 10px;">{{ latest_song[2] }}</h5>
+                            <a href="{{ url_for('user_lyrics.get_lyrics', song_id=latest_song[0]) }}" class="btn btn-primary" style="background-color: #FFE2A8; border-color: #FFE2A8; color: black;">Read Lyrics</a>
+
+
+<center>
+                            {% if latest_song[10] %}
+        <audio controls style="width: 270px;">
+            <source src="{{ url_for('creator_dashboard.play_audio', song_id=latest_song[0]) }}" type="audio/mp3">
+            
+        </audio>
+    {% endif %}
+</center>
+                        </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{{ url_for('user_songs.display_all_songs') }}" class="btn btn-info ml-2" style="background-color: #FFE2A8; border-color: #FFE2A8; ">Show More Songs</a>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+<div class="container mt-4">
+    <h2 style="color: #f84952;">Playlists</h2>
+<div class="song-container" style="margin-top: 30px;">
+    
+    <div class="row">
+        {% for latest_playlist in latest_playlist[:4] %}
+            <div class="col-md-3 song-card" style="margin-bottom: 20px;">
+                <div class="card" style="color: #f65159; border: 1px solid #FFE2A8; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <div class="card-body" style="padding: 20px; text-align: center;">
+                        <h5 class="card-title" style=" margin-bottom: 10px;">{{ latest_playlist[1] }}</h5>
+                        <a href="{{ url_for('user_playlists.get_playlist_songs', playlist_id=latest_playlist[0]) }}" class="btn btn-primary" style="background-color: #FFE2A8; border-color: #FFE2A8; color: black;">View Tracks</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+        
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{{ url_for('user_create_playlists.create_playlist_page') }}" class="btn btn-info ml-2" style="background-color: #FFE2A8; border-color: #FFE2A8;">Create Playlist</a>
+             
+            <a href="{{ url_for('user_playlists.get_all_playlists_songs') }}" class="btn btn-info ml-2" style="background-color: #FFE2A8; border-color: #FFE2A8; margin-left: 10px;">Show More Playlists</a>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+<div class="container mt-4">
+    <h2 style="color: #f84952;">Genre:  Sad</h2>
+
+    <div class="song-container">
+        <div class="row">
+            {% for sad_songs in sad_songs %}
+                <div class="col-md-3 song-card" style="margin-bottom: 20px;">
+                    <div class="card" style="color: #f65159; border: 1px solid #FFE2A8; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); ">
+                        <div class="card-body" style="padding: 20px; text-align: center;">
+                            <h5 class="card-title" style=" margin-bottom: 10px;">{{ sad_songs[2] }}</h5>
+                            <a href="{{ url_for('user_lyrics.get_lyrics', song_id=sad_songs[0]) }}" class="btn btn-primary" style="background-color: #FFE2A8; border-color: #FFE2A8; color: black;">Read Lyrics</a>
+                            <center>
+                                {% if sad_songs[10] %}
+            <audio controls style="width: 270px;">
+                <source src="{{ url_for('creator_dashboard.play_audio', song_id=sad_songs[0]) }}" type="audio/mp3">
+                
+            </audio>
+        {% endif %}
+    </center>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+<br><br>
+
+<div class="container mt-4">
+    <h2 style="color: #f84952;">Genre: Romantic</h2>
+
+    <div class="song-container" >
+        <div class="row">
+            {% for romantic_songs in romantic_songs %}
+                <div class="col-md-3 song-card" style="margin-bottom: 20px;">
+                    <div class="card" style="color: #f65159; border: 1px solid #FFE2A8; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); ">
+                        <div class="card-body" style="padding: 20px; text-align: center;">
+                            <h5 class="card-title" style="font-size: 1.2rem; margin-bottom: 10px;">{{ romantic_songs[2] }}</h5>
+                            <a href="{{ url_for('user_lyrics.get_lyrics', song_id=romantic_songs[0]) }}" class="btn btn-primary" style="background-color: #FFE2A8; border-color: #FFE2A8; color: black;">Read Lyrics</a>
+                            <center>
+                                {% if romantic_songs[10] %}
+            <audio controls style="width: 270px;">
+                <source src="{{ url_for('creator_dashboard.play_audio', song_id=romantic_songs[0]) }}" type="audio/mp3">
+                
+            </audio>
+        {% endif %}
+    </center>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+{%endblock%}
+
+
+

@@ -1,0 +1,35 @@
+{% extends 'user_base.html' %}
+{%block content%}
+
+
+<div style="margin-top: 4rem; max-width: 800px;" class="container">
+    <div class="accordion" id="accordionExample">
+        {% for song in playlist_songs %}
+            <div class="accordion-item" style="border: 1px solid #ffffff; border-radius: 8px; margin-bottom: 10px;">
+                <h2 class="accordion-header" id="heading_{{ song[0] }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ song[0] }}" aria-expanded="true" aria-controls="collapse_{{ song[0] }}" style="background-color: #FFE2A8; border-color: #FFE2A8; color: black; width: 100%;">
+                        {{ song[1] }} by {{ song[3] }}
+                    </button>
+                </h2>
+                <div id="collapse_{{ song[0] }}" class="accordion-collapse collapse" aria-labelledby="heading_{{ song[0] }}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body" style="background-color: #ffffff; border-radius: 0 0 8px 8px; color: black; width: 100%;">
+                        <p>Rating: {{ song[2] }}</p>
+                        <p>Lyrics: {{ song[4] }}</p>
+                        <audio controls style="width: 270px;">
+                            <source src="{{ url_for('creator_dashboard.play_audio', song_id=song[0]) }}" type="audio/mp3">
+                           
+                        </audio>
+                        <form id="ratingForm" action="{{ url_for('user_lyrics.rate_song', song_id=song[0]) }}" method="post">
+                            <label for="rating">Rate the song (1-5):</label>
+                            <input type="number" name="rating" id="rating" min="1" max="5" required style="margin-right: 10px;">
+                            <button type="submit" class="btn btn-primary" style="background-color: #ffffff; border-color: #FFE2A8; color: black;">Submit Rating</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+        {% endfor %}
+    </div>
+</div>
+
+{%endblock%}

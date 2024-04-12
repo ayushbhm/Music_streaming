@@ -1,0 +1,77 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+  <h1 class="mt-4">Admin Management</h1>
+
+  <div style="max-width: 800px; margin: 50px auto;">
+
+    <!-- Creators Card -->
+    <div class="card" style="background-color: #fcdc9e; border: 1px solid #e74c3c; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px; margin-top: 20px;">
+      <h2>Creators</h2>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Blacklisted</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for creator in creators %}
+            <tr>
+              <td>{{ creator[0] }}</td>
+              <td>{{ creator[1] }}</td>
+              {% if creator[4] == 0 %}
+              <td>No</td>
+              {% else %}
+              <td>Yes</td>
+              {% endif %}
+              <td>
+                {% if creator[4] == 0 %}
+                <button type="submit" style="background-color: #3498db; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+                  <a href="{{ url_for('admin_manage.blacklist_creator', user_id=creator[0]) }}" style="color: #ffffff;">Blacklist</a>
+                </button>
+                {% else %}
+                <button type="submit" style="background-color: #3498db; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+                  <a href="{{ url_for('admin_manage.unblacklist_creator', user_id=creator[0]) }}" style="color: #ffffff;">Unblacklist</a>
+                </button>
+                  
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Songs Card -->
+    <div class="card" style="background-color: #fcdc9e; border: 1px solid #3498db; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); padding: 20px; margin-top: 20px;">
+      <h2>Songs</h2>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for song in songs %}
+            <tr>
+              <td>{{ song[0] }}</td>
+              <td>{{ song[2] }}</td>
+              <td>{{ song[6] }}</td>
+              <td>
+                <button type="submit" style="background-color: #3498db; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+                <a href="{{ url_for('admin_manage.delete_song', song_id=song[0]) }}" style="color: #ffffff;">Delete</a>
+            </button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+{% endblock %}

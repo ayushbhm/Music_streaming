@@ -1,0 +1,27 @@
+{% extends 'user_base.html' %}
+{%block content%}
+
+
+<div class="container mt-4">
+    <h1 class="mb-4" style="color: #f65159;">All Songs</h1>
+
+    <ul class="list-group">
+        {% for all_songs in all_songs %}
+            <li class="list-group-item" style="border: 1px solid #FFE2A8; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+                <h5 class="mb-1"> {{ all_songs[2] }}</h5>
+                <a href="{{ url_for('user_lyrics.get_lyrics', song_id=all_songs[0]) }}" class="btn btn-primary" style="background-color: #FFE2A8; border-color: #FFE2A8; color: black;">Read Lyrics</a>
+                <audio controls style="width: 270px;">
+                    <source src="{{ url_for('creator_dashboard.play_audio', song_id=all_songs[0]) }}" type="audio/mp3">
+                   
+                </audio>
+            </li>
+            
+            <br>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+
+{%endblock%}

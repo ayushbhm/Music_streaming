@@ -1,0 +1,66 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+
+<div style="max-width: 800px; margin: 50px auto; padding: 20px; background-color: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center;">
+    <h2 style="text-align: center;">Admin Dashboard</h2>
+    <div style="display: flex; justify-content: space-around;">
+
+        <div style="flex: 1; max-width: 200px; background-color: #FFE2A8; color: #000000; text-align: center; border-radius: 5px; padding: 20px; margin-right: 20px;">
+            <p>Number of Users</p>
+            <p>{{ user_count }}</p>
+        </div>
+
+        <div style="flex: 1; max-width: 200px; background-color: #FFE2A8; color: #000000; text-align: center; border-radius: 5px; padding: 20px; margin-right: 20px;">
+            <p>Number of Creators</p>
+            <p>{{ creator_count }}</p>
+        </div>
+
+        <div style="flex: 1; max-width: 200px; background-color: #FFE2A8; color: #000000; text-align: center; border-radius: 5px; padding: 20px;">
+            <p>Total Songs</p>
+            <p>{{ song_count }}</p>
+        </div>
+
+    </div>
+
+    <div style="flex: 1; max-width: 200px; background-color: #FFE2A8; color: #000000; text-align: center; border-radius: 5px; padding: 20px; margin-top: 20px;">
+        <p>Total Albums</p>
+        <p>{{ album_count }}</p>
+    </div>
+
+    <div style="flex: 1; max-width: 200px; background-color: #FFE2A8; color: #000000; text-align: center; border-radius: 5px; padding: 20px; margin-top: 20px;">
+        <p>Total Playlists</p>
+        <p>{{ playlist_count }}</p>
+    </div>
+</div>
+
+
+<div style="max-width: 800px; margin: 50px auto; padding: 20px; background-color: #FFE2A8; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center;">
+    <h3 style="color: #333; text-align: center;">Most Popular Songs</h3>
+    <ul style="list-style: none; padding: 0;">
+        {% for song in top_songs %}
+            <li style="margin-bottom: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px; background-color: #fff;">
+                <strong>{{ song[2] }}</strong> - {{ song[10] }} clicks
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+<div style="max-width: 800px; margin: 50px auto; padding: 20px; background-color: #FFE2A8; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center;">
+    <h3 style="color: #333; text-align: center;">Top Genres</h3>
+    <ul style="list-style: none; padding: 0;">
+        {% for genre in top_genres %}
+            <li style="margin-bottom: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px; background-color: #fff;">
+                <strong>{{ genre[0] }}</strong> - {{ genre[1] }} total clicks
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+
+
+
+{% endblock %}

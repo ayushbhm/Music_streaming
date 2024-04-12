@@ -1,0 +1,32 @@
+{% extends 'user_base.html' %}
+{%block content%}
+
+
+
+
+<div class="container mt-4">
+    <div class="card custom-card" style="max-height: 400px; overflow-y: auto; color: black; border: 1px solid #FFE2A8; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); ;">
+        <div class="card-header" style="background-color: #fae2af;">
+            <h3 class="card-title" style="margin-bottom: 0;">{{ song_title }} Lyrics</h3>
+            Album- {{album_name[0][1]}}
+            <p class="card-subtitle mb-2 text-muted">by {{ song_artist }}</p>
+            
+            <p class="card-subtitle mb-2 text-muted"> Rating: {{ song_rating }}/5</p>
+        </div>
+        <div class="card-body" style="padding: 20px; text-align: justify;">
+            <p>{{ song_lyrics }}</p>
+        </div>
+
+        
+        <div class="card-footer" style="background-color: #fcebca;">
+            <form id="ratingForm" action="{{ url_for('user_lyrics.rate_song', song_id=song_id) }}" method="post">
+                <label for="rating">Rate the song (1-5):</label>
+                <input type="number" name="rating" id="rating" min="1" max="5" required style="margin-right: 10px;">
+                <button type="submit" class="btn btn-primary" style="background-color: #ffffff; border-color: #FFE2A8; color: black;">Submit Rating</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

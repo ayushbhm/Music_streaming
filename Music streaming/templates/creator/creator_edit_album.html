@@ -1,0 +1,80 @@
+{% extends 'user_base.html' %}
+
+{% block content %}
+
+
+
+
+<div>
+    <form method="post" action="{{ url_for('creator_dashboard.add_album') }}">
+      
+      <div style="max-width: 400px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h3>Add a New Album</h3>
+
+        <div style="margin-bottom: 15px;">
+          <label for="new_name">Name:</label>
+          <input type="text" id="new_name" name="new_name" required>
+        </div>
+
+        
+
+        <div style="margin-bottom: 15px;">
+          <label for="new_artist_name">Artist Name:</label>
+          <input type="text" id="new_artist_name" name="new_artist_name" required>
+        </div>
+
+        
+        <button type="submit" style="background-color: #3498db; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+          Add Album
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+
+
+  
+
+  <div>
+    <h2>Your Albums</h2>
+    {% for album in all_albums %}
+      <form method="post" action="{{ url_for('creator_dashboard.edit_album', album_id=album[0]) }}">
+        <div style="max-width: 400px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+          <h3>{{ album[1] }}</h3>
+          <p>Genre: {{ album[2] }}</p>
+          <p>Artist Name: {{ album[3] }}</p>
+
+          
+          <div style="margin-bottom: 15px;">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="{{ album[1] }}" required>
+          </div>
+
+          <div style="margin-bottom: 15px;">
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" value="{{ album[2] }}" required>
+          </div>
+
+          <div style="margin-bottom: 15px;">
+            <label for="artist_name">Artist Name:</label>
+            <input type="text" id="artist_name" name="artist_name" value="{{ album[3] }}" required>
+          </div>
+
+          
+          <button type="submit" style="background-color: #3498db; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+            Update Album
+          </button>
+
+          
+          <a href="{{ url_for('creator_dashboard.delete_album', album_id=album[0]) }}" style="background-color: #e74c3c; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px; text-decoration: none;">
+            Delete Album
+          </a>
+        </div>
+      </form>
+    {% endfor %}
+  </div>
+
+
+
+{% endblock %}

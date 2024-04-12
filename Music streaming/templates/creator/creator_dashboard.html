@@ -1,0 +1,78 @@
+{% extends 'user_base.html' %}
+{%block content%}
+
+
+
+<div style="max-width: 800px; margin: 50px auto; padding: 20px; background-color: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center;">
+    <h2 style="text-align: center;">Creator Dashboard</h2>
+    <div style="display: flex; justify-content: space-around;">
+
+        <div style="flex: 1; max-width: 200px; background-color: #FFE2A8; color: #000000; text-align: center; border-radius: 5px; padding: 20px; margin-right: 20px;">
+            <p>Total Songs</p>
+            <p>{{ num_songs }}</p>
+        </div>
+
+        <div style="flex: 1; max-width: 200px; background-color: #FFE2A8; color: #000000; text-align: center; border-radius: 5px; padding: 20px; margin-right: 20px;">
+            <p>Avg Rating</p>
+            <p>{{ avg_rating }}</p>
+        </div>
+
+        <div style="flex: 1; max-width: 200px; background-color: #FFE2A8; color: #000000; text-align: center; border-radius: 5px; padding: 20px;">
+            <p>Total Albums</p>
+            <p>{{ num_albums }}</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<h2>Your Uploads</h2>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+
+  
+    {% for song in all_songs %}
+  
+        <div style="flex: 1; max-width: 200px; background-color: #fcdc9e; color: #000000; text-align: center; border-radius: 5px; padding: 20px; margin: 0 10px 20px 10px;">
+            <p>Title: {{ song[1] }}</p>
+            <p>Artist: {{ song[2] }}</p>
+           
+            <p>
+                <button type="submit" style="background-color: #3498db; color: #ffffff; padding: 10px; border: none; border-radius: 5px; ">
+                <a href="{{ url_for('creator_dashboard.edit_song', song_id=song[0]) }}" style="color: #fff;">Edit</a> 
+            </button> 
+
+            <form method="post" action="{{ url_for('creator_dashboard.delete_song', song_id=song[0]) }}">
+                <button type="submit" style="background-color: #3498db; color: #ffffff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+                    Delete
+                </button>
+            </form>
+            
+            </p>
+        </div>
+    {% endfor %}
+</div>
+
+
+<div style="max-width: 400px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center;">Upload a New Song</h2>
+    <button type="submit" style="background-color: #3498db; color: #ffffff; padding: 10px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+        <a href="{{ url_for('creator_dashboard.display_upload_form') }}" style="color: #fff; text-decoration: none;">Upload a New Song</a>
+    </button>
+    
+</div>
+
+
+<!-- Redirect button to creator_edit_album.html -->
+
+<div style="max-width: 400px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center;">Manage your Albums</h2>
+    <button type="submit" style="background-color: #3498db; color: #ffffff; padding: 10px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+        <a href="{{ url_for('creator_dashboard.display_creator_edit_album') }}" style="color: #fff; text-decoration: none;">Manage Albums</a>
+    </button>
+</div>
+
+
+
+{%endblock%}

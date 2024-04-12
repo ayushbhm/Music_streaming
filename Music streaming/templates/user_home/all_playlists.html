@@ -1,0 +1,27 @@
+{% extends 'user_base.html' %}
+{%block content%}
+
+
+<div class="container mt-4">
+    <h1 class="mb-4">All Playlists for User</h1>
+
+    <ul class="list-group">
+        {% for all_playlist in all_playlist %}
+            <li class="list-group-item" style="border: 1px solid #FFE2A8; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top: 25px; ">
+                <h5 class="mb-1"><strong>Playlist Name:</strong> {{ all_playlist[1] }}</h5>
+                
+                <a href="{{ url_for('user_playlists.get_playlist_songs', playlist_id=all_playlist[0]) }}" class="btn btn-info" style="background-color: #FFE2A8; border-color: #FFE2A8; color: black;">View Tracks</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+{%endblock%}
+
